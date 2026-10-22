@@ -1,0 +1,12 @@
+{
+  "project": "SpecProof",
+  "version": "specproof/0.2.0",
+  "network": "GenLayer Studio Next",
+  "chainId": 61997,
+  "rpc": "https://studio-next.genlayer.com/api",
+  "explorer": "https://explorer-studio-dev.genlayer.com/",
+  "contractAddress": "PASTE_CONTRACT_ADDRESS",
+  "deploymentTransaction": "PASTE_DEPLOY_TX_HASH",
+  "liveEvidence": "docs/EVIDENCE.md",
+  "note": "Redeploy contracts/spec_proof.py (v0.2.0 adds recover) and fill both PASTE values."
+}
