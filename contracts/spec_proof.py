@@ -83,15 +83,6 @@ def is_https(url: str) -> bool:
     return url.startswith("https://") and 12 <= len(url) <= MAX_URL and " " not in url
 
 
-@gl.evm.contract_interface
-class _Wallet:
-    class View:
-        pass
-
-    class Write:
-        pass
-
-
 class SpecProof(gl.contract.Contract):
     guarantees: gl.storage.TreeMap[u256, str]
     stakes: gl.storage.TreeMap[str, u256]
@@ -120,7 +111,9 @@ class SpecProof(gl.contract.Contract):
 
     def _pay(self, who: str, amount: int) -> None:
         if amount > 0:
-            _Wallet(Address(who)).emit_transfer(value=u256(amount))
+            # Wallets live on the EVM side: on Studio Next only an external message
+            # (emit_call with empty calldata) reaches them. Internal transfers do not.
+            gl.evm.Account(Address(who)).emit_call(amount, b"")
 
     # ------------------------------------------------------------------ creator
 
